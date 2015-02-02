@@ -98,19 +98,11 @@ public class Magpie5
 						response = transformIYouStatement(statement);
 					}
 					}
-<<<<<<< Updated upstream
-					else
-					{
-						response = getRandomResponse();
-					}
-				}
-=======
 				}
 			}
 			else
 			{
 				response = getRandomResponse();
->>>>>>> Stashed changes
 			}
 		}
 		return response;
