@@ -41,27 +41,41 @@ public class Magpie5
 	{
 		statement = statement.toLowerCase();
 		String response = "";
+		
+		Pattern family = Pattern.compile("(mother|mom|dad|father|brother|sister)");
+		Matcher mFamily = family.matcher(statement);
+		
+		Pattern no = Pattern.compile("(no)");
+		Matcher mNo = no.matcher(statement);
+		
+		Pattern iWant = Pattern.compile("(i want)");
+		Matcher mIWant = iWant.matcher(statement);
+		
+		Pattern iWantTo = Pattern.compile("(i want to)");
+		Matcher mIWantTo = iWantTo.matcher(statement);
+		
 		if (statement.length() == 0)
 		{
 			response = "Say something, please.";
 		}
 
-		else if (statement.matches("(no)"))
+		else if (mNo.find())
 		{
+			
 			response = "Why so negative?";
 		}
-		else if (statement.matches("(mother|mom|dad|father|brother|sister)"))
+		else if (mFamily.find())
 		{
 			response = "Tell me more about your family.";
 		}
 
 		// Responses which require transformations
-		else if (findKeyword(statement, "I want to", 0) >= 0)
+		else if (mIWantTo.find())
 		{
 			response = transformIWantToStatement(statement);
 		}
 		//  Part of student solution
-		else if (findKeyword(statement, "I want", 0) >= 0)
+		else if (mIWant.find())
 		{
 			response = transformIWantStatement(statement);
 		}
@@ -98,19 +112,11 @@ public class Magpie5
 						response = transformIYouStatement(statement);
 					}
 					}
-<<<<<<< Updated upstream
-					else
-					{
-						response = getRandomResponse();
-					}
-				}
-=======
 				}
 			}
 			else
 			{
 				response = getRandomResponse();
->>>>>>> Stashed changes
 			}
 		}
 		return response;
