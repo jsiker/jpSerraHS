@@ -53,12 +53,12 @@ public class Magpie5
 		}
 
 		// Responses which require transformations
-		else if (findKeyword(statement, "I want to", 0) >= 0)
+		else if (statement.matches("(i want to)"))
 		{
 			response = transformIWantToStatement(statement);
 		}
 		//  Part of student solution
-		else if (findKeyword(statement, "I want", 0) >= 0)
+		else if (statement.matches("(i want)"))
 		{
 			response = transformIWantStatement(statement);
 		}
@@ -88,21 +88,21 @@ public class Magpie5
 					
 					if (m.find()) {
 					int ipsn = m.start();
-	
+					
 					if (ipsn >= 0
-							&& statement.indexOf("you") >= ipsn)
+							&& statement.indexOf("you") > ipsn)
 					{
 						response = transformIYouStatement(statement);
 					}
-					}
-					else
-					{
-						response = getRandomResponse();
-					}
 				}
+			}	
+		}
+		else
+			{
+				response = getRandomResponse();
 			}
 		}
-		return response;
+	return response;
 	}
 	
 	/**
@@ -122,7 +122,10 @@ public class Magpie5
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want to", 0);
+		Pattern p = Pattern.compile("(i want to)");
+		Matcher m = p.matcher(statement);
+		int psn = m.start();
+		
 		String restOfStatement = statement.substring(psn + 9).trim();
 		return "What would it mean to " + restOfStatement + "?";
 	}
@@ -140,14 +143,15 @@ public class Magpie5
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
 				.length() - 1);
-		if (lastChar.equals(".") 
-				|| lastChar.equals("!") 
-				|| lastChar.equals("?"))
+		if (lastChar.matches("(.)"))
 		{
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want", 0);
+		Pattern p = Pattern.compile("(i want)");
+		Matcher m = p.matcher(statement);
+		int psn = m.start();
+		
 		String restOfStatement = statement.substring(psn + 6).trim();
 		return "Would you really be happy if you had " + restOfStatement + "?";
 	}
@@ -195,7 +199,7 @@ public class Magpie5
 					.length() - 1);
 		}
 		
-		int psnOfI = findKeyword (statement, "I", 0);
+		int psnOfI = findKeyword (statement, "i", 0);
 		int psnOfYou = findKeyword (statement, "you", psnOfI);
 		
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
