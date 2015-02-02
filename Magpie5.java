@@ -42,16 +42,16 @@ public class Magpie5
 		statement = statement.toLowerCase();
 		String response = "";
 		
-		Pattern family = Pattern.compile("(mother|mom|dad|father|brother|sister)");
+		Pattern family = Pattern.compile("\\b(mother|mom|dad|father|brother|sister)\\b");
 		Matcher mFamily = family.matcher(statement);
 		
-		Pattern no = Pattern.compile("(no)");
+		Pattern no = Pattern.compile("\\b(no)\\b");
 		Matcher mNo = no.matcher(statement);
 		
-		Pattern iWant = Pattern.compile("(i want)");
+		Pattern iWant = Pattern.compile("\\b(i want)\\b");
 		Matcher mIWant = iWant.matcher(statement);
 		
-		Pattern iWantTo = Pattern.compile("(i want to)");
+		Pattern iWantTo = Pattern.compile("\\b(i want to)\\b");
 		Matcher mIWantTo = iWantTo.matcher(statement);
 		
 		if (statement.length() == 0)
