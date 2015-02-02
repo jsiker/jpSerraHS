@@ -1,3 +1,4 @@
+
 package magpie2;
 
 import java.util.Random;
@@ -11,10 +12,12 @@ import java.util.regex.*;
  * 		Uses advanced search for keywords 
  *</li><li>
  * 		Will transform statements as well as react to keywords
+ *</li><li>
+ *		Uses regexes to find one word goals in strings
  *</li></ul>
  * This version uses an array to hold the default responses.
  * @author Laurie White
- * @version April 2012
+ * @version adapted by Jon Siker, Feb. 2015
  */
 public class Magpie5
 {
@@ -95,11 +98,19 @@ public class Magpie5
 						response = transformIYouStatement(statement);
 					}
 					}
+<<<<<<< Updated upstream
 					else
 					{
 						response = getRandomResponse();
 					}
 				}
+=======
+				}
+			}
+			else
+			{
+				response = getRandomResponse();
+>>>>>>> Stashed changes
 			}
 		}
 		return response;
